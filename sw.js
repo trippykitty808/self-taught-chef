@@ -1,11 +1,11 @@
 /* Service worker - offline support for The Self-Taught Chef Program */
-var VERSION = "chef-v1";
+var VERSION = "chef-v5";
 var CORE = [
   "./",
   "./index.html",
-  "./app.css",
-  "./app.js",
-  "./data.js",
+  "./app.css?v=5",
+  "./app.js?v=5",
+  "./data.js?v=5",
   "./manifest.webmanifest",
   "./icons/icon-192.png",
   "./icons/icon-512.png",

@@ -29,10 +29,24 @@
   function moduleByN(n){ return C.modules.filter(function(m){return m.n===n;})[0]; }
 
   /* ---------- nav ---------- */
+  var ICON = {
+    home:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>',
+    folder:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2.5h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>',
+    play:'<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M7 5l12 7-12 7z"/></svg>',
+    download:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v11"/><path d="M8 11l4 4 4-4"/><path d="M5 20h14"/></svg>',
+    info:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><path d="M12 7.6v.2"/></svg>'
+  };
+  function ico(s){ return '<span class="ico">'+s+'</span>'; }
+  function navItem(route,label,svg){
+    return '<a class="navitem" data-route="'+route+'">'+ico(svg)+'<span>'+label+'</span></a>';
+  }
+  function actionItem(action,label,svg){
+    return '<a class="navitem" data-action="'+action+'">'+ico(svg)+'<span>'+label+'</span></a>';
+  }
   function buildNav(){
     var nav = $("#nav");
     var html = "";
-    html += navItem("home","home","Home","&#8962;");
+    html += navItem("home","Home",ICON.home);
     html += '<div class="section-label">Modules</div>';
     C.modules.forEach(function(m){
       var done = moduleDone(m);
@@ -42,13 +56,11 @@
         + '<span class="check">&#10003;</span></a>';
     });
     html += '<div class="section-label">Resources</div>';
-    html += navItem("downloads","downloads",'Downloads &amp; files','<span class="ico">&#8681;</span>');
-    html += navItem("faculty","faculty","Video library",'<span class="ico">&#9658;</span>');
-    html += navItem("about","about","Install &amp; about",'<span class="ico">&#9432;</span>');
+    html += navItem("downloads","Downloads &amp; files",ICON.folder);
+    html += navItem("faculty","Video library",ICON.play);
+    html += actionItem("install","Install app",ICON.download);
+    html += navItem("about","About",ICON.info);
     nav.innerHTML = html;
-  }
-  function navItem(route,key,label,ico){
-    return '<a class="navitem" data-route="'+route+'">'+ico+'<span>'+label+'</span></a>';
   }
   function pad(n){ return (n<10?"0":"")+n; }
   function shortTitle(t){ return t.split(":")[0]; }
@@ -66,6 +78,8 @@
     var bar = $("#progBar"), lbl = $("#pctLabel");
     if(bar) bar.style.width = pct+"%";
     if(lbl) lbl.textContent = pct+"%";
+    var tb = document.getElementById("tbPct");
+    if(tb) tb.textContent = pct+"% done";
     // update nav done states
     C.modules.forEach(function(m){
       var a = document.querySelector('#nav .navitem[data-route="module/'+m.n+'"]');
@@ -252,7 +266,7 @@
   }
 
   function viewAbout(){
-    var h = '<div class="mhead"><div class="eyebrow">ABOUT</div><h1>Install &amp; about</h1></div>';
+    var h = '<div class="mhead"><div class="eyebrow">ABOUT</div><h1>About &amp; install</h1></div>';
     h += '<div class="callout"><b>Install this app:</b> on a phone, open the browser menu and choose <i>Add to Home Screen</i>. On a laptop, look for the install icon in the address bar. It then works offline like a normal app.</div>';
     h += '<h2 class="section-h">About this program</h2>';
     h += '<p class="muted">'+esc(C.title)+' - '+esc(C.subtitle)+'. A self-paced curriculum of '+totalLessons+' lessons across '+C.modules.length+' modules, built on free, highly credible video lessons (classically trained chefs, tested-recipe institutions, food-science educators, and USDA / FoodSafety.gov for safety). Your progress is saved on this device.</p>';
@@ -331,6 +345,9 @@
         render();
         return;
       }
+      if(a==="install"){
+        e.preventDefault(); doInstall(); return;
+      }
       if(a==="reset"){
         if(confirm("Reset all progress on this device? This cannot be undone.")){
           state = {done:[]}; save(state); refreshProgress(); render();
@@ -366,40 +383,25 @@
   function closeDrawer(){ document.getElementById("app").classList.remove("nav-open"); }
   document.getElementById("menuBtn").addEventListener("click", openDrawer);
   document.getElementById("scrim").addEventListener("click", closeDrawer);
+  var dClose = document.getElementById("drawerClose");
+  if(dClose) dClose.addEventListener("click", closeDrawer);
 
   window.addEventListener("hashchange", render);
 
   /* ---------- install (Add to Home Screen) ---------- */
   var deferredPrompt = null;
-  var installBtn = document.getElementById("installBtn");
-  function isStandalone(){
-    return (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches)
-        || window.navigator.standalone === true;
+  window.addEventListener("beforeinstallprompt", function(e){ e.preventDefault(); deferredPrompt = e; });
+  window.addEventListener("appinstalled", function(){ deferredPrompt = null; });
+  function doInstall(){
+    closeDrawer();
+    if(deferredPrompt){
+      deferredPrompt.prompt();
+      if(deferredPrompt.userChoice){ deferredPrompt.userChoice.then(function(){ deferredPrompt = null; }); }
+    } else {
+      // No native prompt (e.g. iOS Safari) - send them to the instructions
+      go("about");
+    }
   }
-  function showInstall(){ if(installBtn && !isStandalone()) installBtn.hidden = false; }
-  function hideInstall(){ if(installBtn) installBtn.hidden = true; }
-  window.addEventListener("beforeinstallprompt", function(e){
-    e.preventDefault(); deferredPrompt = e; showInstall();
-  });
-  if(installBtn){
-    installBtn.addEventListener("click", function(){
-      if(deferredPrompt){
-        deferredPrompt.prompt();
-        if(deferredPrompt.userChoice){ deferredPrompt.userChoice.then(function(){ deferredPrompt=null; hideInstall(); }); }
-        else { deferredPrompt=null; hideInstall(); }
-      } else {
-        // No native prompt (e.g. iOS Safari) - send them to the instructions
-        go("about");
-      }
-    });
-  }
-  window.addEventListener("appinstalled", function(){ deferredPrompt=null; hideInstall(); });
-  // Show a manual install button on iOS (no beforeinstallprompt there)
-  (function(){
-    var ua = window.navigator.userAgent || "";
-    var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
-    if(isIOS && !isStandalone()) showInstall();
-  })();
 
   /* ---------- init ---------- */
   buildNav();
