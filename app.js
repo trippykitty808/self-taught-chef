@@ -181,8 +181,8 @@
 
     // prev / next
     h += '<div class="modnav">';
-    if(m.n>1){ var p=moduleByN(m.n-1); h += '<a data-route="module/'+(m.n-1)+'"><small>&larr; Previous</small>Module '+pad(m.n-1)+': '+esc(shortTitle(p.title))+'</a>'; } else { h+='<span></span>'; }
-    if(m.n<C.modules.length){ var nx=moduleByN(m.n+1); h += '<a data-route="module/'+(m.n+1)+'" style="text-align:right"><small>Next &rarr;</small>Module '+pad(m.n+1)+': '+esc(shortTitle(nx.title))+'</a>'; }
+    if(m.n>1){ var p=moduleByN(m.n-1); h += '<a data-route="module/'+(m.n-1)+'"><span class="mn-h">&larr; Module '+pad(m.n-1)+':</span><span class="mn-t">'+esc(shortTitle(p.title))+'</span></a>'; } else { h+='<span></span>'; }
+    if(m.n<C.modules.length){ var nx=moduleByN(m.n+1); h += '<a data-route="module/'+(m.n+1)+'" style="text-align:right"><span class="mn-h">Module '+pad(m.n+1)+': &rarr;</span><span class="mn-t">'+esc(shortTitle(nx.title))+'</span></a>'; }
     h += '</div>';
     return h;
   }
@@ -194,15 +194,15 @@
       + '<span class="spacer"></span>'
       + '<a class="btn ghost" href="'+esc(m.deckPdf)+'" target="_blank" rel="noopener" title="Open full screen">&#8599; Full screen</a>'
       + '<div class="dropdown">'
-        + '<button class="btn" data-action="toggleMenu" data-menu="'+id+'">&#8681; Download</button>'
+        + '<button class="btn" data-action="toggleMenu" data-menu="'+id+'"><svg class="dlarrow" viewBox="0 0 24 24"><path d="M11 3h2v10h4l-5 6-5-6h4z"></path></svg> Download</button>'
         + '<div class="menu" id="'+id+'">'
           + '<a href="'+esc(m.deckPdf)+'" download><span class="mi">PDF</span><span>Download PDF<small>View anywhere - no PowerPoint needed</small></span></a>'
           + '<a href="'+esc(m.deckPptx)+'" download><span class="mi">PPTX</span><span>Download PowerPoint<small>Edit in PowerPoint, Keynote or Google Slides</small></span></a>'
         + '</div>'
       + '</div>'
       + '</div>';
-    h += '<iframe class="deck-frame" src="'+esc(m.deckPdf)+'#view=FitH" title="Module '+m.n+' slides" loading="lazy"></iframe>';
-    h += '<p class="deck-fallback">If the slides don\'t display above (some phone browsers can\'t embed PDFs), tap <b>Full screen</b> to open them, or use <b>Download</b>.</p>';
+    h += '<div class="deck-strip"><img src="'+esc(m.deckStrip)+'" alt="Module '+m.n+' slides" loading="lazy"></div>';
+    h += '<p class="deck-fallback">Scroll the slides above. The video links on the last slide are clickable in the downloadable deck, and the same links are in the <b>Watch</b> section just below.</p>';
     return h;
   }
 
@@ -239,7 +239,7 @@
     h += '<h2 class="section-h">Core materials</h2><div class="dl-grid">';
     C.materials.forEach(function(f){
       h += '<div class="dl"><span class="tag">PDF</span><h3>'+esc(f.title)+'</h3><p>'+esc(f.desc)+'</p>'
-        + '<div class="row"><a class="btn" href="'+esc(f.file)+'" download>&#8681; Download</a>'
+        + '<div class="row"><a class="btn" href="'+esc(f.file)+'" download><svg class="dlarrow" viewBox="0 0 24 24"><path d="M11 3h2v10h4l-5 6-5-6h4z"></path></svg> Download</a>'
         + '<a class="btn ghost" href="'+esc(f.file)+'" target="_blank" rel="noopener">Open</a></div></div>';
     });
     h += '</div>';
@@ -247,8 +247,8 @@
     C.modules.forEach(function(m){
       h += '<div class="dl"><span class="tag">MODULE '+pad(m.n)+'</span><h3>'+esc(shortTitle(m.title))+'</h3>'
         + '<p>9-slide deck. View as PDF or edit the PPTX.</p>'
-        + '<div class="row"><a class="btn" href="'+esc(m.deckPdf)+'" download>&#8681; PDF</a>'
-        + '<a class="btn ghost" href="'+esc(m.deckPptx)+'" download>&#8681; PPTX</a></div></div>';
+        + '<div class="row"><a class="btn" href="'+esc(m.deckPdf)+'" download><svg class="dlarrow" viewBox="0 0 24 24"><path d="M11 3h2v10h4l-5 6-5-6h4z"></path></svg> PDF</a>'
+        + '<a class="btn ghost" href="'+esc(m.deckPptx)+'" download><svg class="dlarrow" viewBox="0 0 24 24"><path d="M11 3h2v10h4l-5 6-5-6h4z"></path></svg> PPTX</a></div></div>';
     });
     h += '</div>';
     return h;

@@ -200,3 +200,12 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif}
   .hero h1{font-size:34px}
   .wrap{padding:28px 26px 80px}
 }
+
+.deck-strip{max-height:74vh;overflow-y:auto;border:1px solid var(--line);border-top:none;border-radius:0 0 10px 10px;background:#fff;-webkit-overflow-scrolling:touch}
+.deck-strip img{width:100%;display:block}
+.dl .btn.ghost{background:#fff;color:var(--ink);border:1px solid var(--line)}
+
+.videos .vt,.videos .vu{display:block}
+.dlarrow{width:12px;height:12px;fill:currentColor;display:inline-block;vertical-align:-1px;margin-right:2px}
+.modnav a .mn-h{display:block;color:var(--copper);font-weight:600;font-size:13.5px}
+.modnav a .mn-t{display:block;color:var(--char);font-weight:400;font-size:12.5px;margin-top:2px}

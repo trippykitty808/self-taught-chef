@@ -41,6 +41,7 @@ window.COURSE = {
       ],
       "deckPdf": "assets/decks/Module_01_Kitchen_Foundations.pdf",
       "deckPptx": "assets/decks/Module_01_Kitchen_Foundations.pptx",
+      "deckStrip": "assets/slides/Module_01_Kitchen_Foundations.jpg",
       "lessons": [
         {
           "id": "m1_l1",
@@ -182,6 +183,7 @@ window.COURSE = {
       ],
       "deckPdf": "assets/decks/Module_02_Knife_Skills.pdf",
       "deckPptx": "assets/decks/Module_02_Knife_Skills.pptx",
+      "deckStrip": "assets/slides/Module_02_Knife_Skills.jpg",
       "lessons": [
         {
           "id": "m2_l1",
@@ -357,6 +359,7 @@ window.COURSE = {
       ],
       "deckPdf": "assets/decks/Module_03_Heat_and_Cooking_Methods.pdf",
       "deckPptx": "assets/decks/Module_03_Heat_and_Cooking_Methods.pptx",
+      "deckStrip": "assets/slides/Module_03_Heat_and_Cooking_Methods.jpg",
       "lessons": [
         {
           "id": "m3_l1",
@@ -532,6 +535,7 @@ window.COURSE = {
       ],
       "deckPdf": "assets/decks/Module_04_Stocks_Soups_and_Sauces.pdf",
       "deckPptx": "assets/decks/Module_04_Stocks_Soups_and_Sauces.pptx",
+      "deckStrip": "assets/slides/Module_04_Stocks_Soups_and_Sauces.jpg",
       "lessons": [
         {
           "id": "m4_l1",
@@ -707,6 +711,7 @@ window.COURSE = {
       ],
       "deckPdf": "assets/decks/Module_05_Eggs_Dairy_and_Breakfast.pdf",
       "deckPptx": "assets/decks/Module_05_Eggs_Dairy_and_Breakfast.pptx",
+      "deckStrip": "assets/slides/Module_05_Eggs_Dairy_and_Breakfast.jpg",
       "lessons": [
         {
           "id": "m5_l1",
@@ -882,6 +887,7 @@ window.COURSE = {
       ],
       "deckPdf": "assets/decks/Module_06_Vegetables_Grains_Legumes.pdf",
       "deckPptx": "assets/decks/Module_06_Vegetables_Grains_Legumes.pptx",
+      "deckStrip": "assets/slides/Module_06_Vegetables_Grains_Legumes.jpg",
       "lessons": [
         {
           "id": "m6_l1",
@@ -1040,6 +1046,7 @@ window.COURSE = {
       ],
       "deckPdf": "assets/decks/Module_07_Poultry_and_Meat.pdf",
       "deckPptx": "assets/decks/Module_07_Poultry_and_Meat.pptx",
+      "deckStrip": "assets/slides/Module_07_Poultry_and_Meat.jpg",
       "lessons": [
         {
           "id": "m7_l1",
@@ -1215,6 +1222,7 @@ window.COURSE = {
       ],
       "deckPdf": "assets/decks/Module_08_Fish_and_Seafood.pdf",
       "deckPptx": "assets/decks/Module_08_Fish_and_Seafood.pptx",
+      "deckStrip": "assets/slides/Module_08_Fish_and_Seafood.jpg",
       "lessons": [
         {
           "id": "m8_l1",
@@ -1373,6 +1381,7 @@ window.COURSE = {
       ],
       "deckPdf": "assets/decks/Module_09_Baking_and_Pastry.pdf",
       "deckPptx": "assets/decks/Module_09_Baking_and_Pastry.pptx",
+      "deckStrip": "assets/slides/Module_09_Baking_and_Pastry.jpg",
       "lessons": [
         {
           "id": "m9_l1",
@@ -1535,6 +1544,7 @@ window.COURSE = {
       ],
       "deckPdf": "assets/decks/Module_10_Global_Cuisines.pdf",
       "deckPptx": "assets/decks/Module_10_Global_Cuisines.pptx",
+      "deckStrip": "assets/slides/Module_10_Global_Cuisines.jpg",
       "lessons": [
         {
           "id": "m10_l1",
@@ -1693,6 +1703,7 @@ window.COURSE = {
       ],
       "deckPdf": "assets/decks/Module_11_Flavor_and_Menu_Development.pdf",
       "deckPptx": "assets/decks/Module_11_Flavor_and_Menu_Development.pptx",
+      "deckStrip": "assets/slides/Module_11_Flavor_and_Menu_Development.jpg",
       "lessons": [
         {
           "id": "m11_l1",
@@ -1817,6 +1828,7 @@ window.COURSE = {
       ],
       "deckPdf": "assets/decks/Module_12_The_Professional_Kitchen.pdf",
       "deckPptx": "assets/decks/Module_12_The_Professional_Kitchen.pptx",
+      "deckStrip": "assets/slides/Module_12_The_Professional_Kitchen.jpg",
       "lessons": [
         {
           "id": "m12_l1",
